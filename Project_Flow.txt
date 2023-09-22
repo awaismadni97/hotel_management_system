@@ -1,0 +1,4 @@
+1) Auth system
+   - Register page
+   - login feature
+   - dashboard 
