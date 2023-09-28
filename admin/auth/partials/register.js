@@ -101,7 +101,6 @@ $("#register_form").validate({
          
           arr.push(userObj);
           localStorage.setItem("users", JSON.stringify(arr));
-          console.log("After registration code");
           sessionStorage.setItem("loginSuccess", "true");
           window.location.href = "./login.html";
           notify("Success", "You are successfully registered", "success");
