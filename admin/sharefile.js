@@ -13,7 +13,7 @@ function makeid(length) {
     return result;
 }
 
-console.log(makeid(25));
+
 
 
 // Toast Alert

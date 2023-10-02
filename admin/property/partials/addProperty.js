@@ -1,4 +1,5 @@
 // localStorage.clear();
+
 let id= null;
 let propertyImages=[];
 let arr =  JSON.parse(localStorage.getItem('propertyData'));
@@ -17,7 +18,11 @@ $("#uploadFile").change(function(e){
 })
 
 
-$("#myForm").validate({
+$("#propertyForm").validate({
+
+    errorClass: "error fail-alert",
+    validClass: "valid success-alert",
+
  rules:{
     property_title:{
         required:true
@@ -28,9 +33,9 @@ $("#myForm").validate({
     property_location:{
         required:true
     },
-    uploadFile:{
-        required:true
-    }
+    // uploadFile:{
+    //     required:true
+    // }
  },messages:{
     property_title:{
         required:'Title field is required'
@@ -41,17 +46,19 @@ $("#myForm").validate({
     property_location:{                                                                                                 
         required:'Location field is required'
     },
-    uploadFile:{
-        required:'Image field is required'
-    }
+    // uploadFile:{
+    //     required:'Image field is required'
+    // }
 
- },submitHandler: function(form){
+ },
+
+ submitHandler: function(form){
     
-    let propertyTitle= $("#property_title").val();
-    let roomType= $("#room_type").val();
-    let propertyLocation= $("#property_location").val();
-    let PropertyDescription= $("#property_description").val();
-    let PropertyImages= propertyImages
+     propertyTitle= $("#property_title").val();
+     roomType= $("#room_type").val();
+     propertyLocation= $("#property_location").val();
+     PropertyDescription= $("#property_description").val();
+     PropertyImages= propertyImages
 
     event.preventDefault();
 
@@ -62,21 +69,36 @@ $("#myForm").validate({
         PropertyDescription:PropertyDescription,
         PropertyImages:PropertyImages
     }
-      
 
-    if(id==null){
-        if(arr==null){
-           let propData=[propertyObj];
-           setLocalData(propData);
+    $("#submit").text("Please wait..");
+    $("#submit").attr("disabled", true);
+    setTimeout(() => {
+        $("#submit").attr("disabled", false);
+        if(id==null){
+            if(arr==null){
+               let propData=[propertyObj];
+               setLocalData(propData);
+               $("#submit").text("Add");
+               sessionStorage.setItem("CreateSuccess", "true");
+                //  alert('Record has been created successfully');
+            }else{
+               arr.push(propertyObj);
+               setLocalData(arr);
+               $("#submit").text("Add");
+               sessionStorage.setItem("CreateSuccess", "true");
+            //    alert('Record has been created successfully');
+            }
         }else{
-           arr.push(propertyObj);
-           setLocalData(arr);
+            //update Logic
+            updateData(id);
+              id=null;
+              $("#submit").text("Add");
+              sessionStorage.setItem("UpdateSuccess", "true");
+            //   alert('Record has been updated successfully');
         }
-    }else{
-        //update Logic
-    }
-    resetData();
-    window.location = "displayProperty.html"
+        resetData();
+        window.location = "displayProperty.html"
+    }, 1000);
 
  } 
 
@@ -100,7 +122,6 @@ function diplayData(){
      if(arr !=null){
         let html="";
           arr.forEach((currentObj,index)=>{
-              console.log(currentObj);
               html= html + 
               `<tr>
                  <td>${currentObj.propertyTitle}</td>
@@ -108,12 +129,11 @@ function diplayData(){
                  <td>${currentObj.propertyLocation}</td>
                  <td>${currentObj.PropertyDescription}</td>
                  <td><img src="../public/storage/property_images/${currentObj.PropertyImages[0].filename}" alt="" width=100></td>
-               
+                  
                  <td>
-                 <button type="button" class="editRecord">
-                 <a href="./addProperty.html?index=${index}">Edit</a>
-               </button>
-                 <a href="#" onclick="deleteData(${index})">Delete</a> 
+                 
+                  <a href="./addProperty.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a> &nbsp;
+                  <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-trash"></i></a> 
                  </td>
                     
                  </tr>`
@@ -126,24 +146,25 @@ function diplayData(){
 }
 
 function deleteData(id){
-    arr.splice(id,1);
-    setLocalData(arr);
-    diplayData();
+    let message = confirm("Do you want to delete this record?");
+    if(message){
+        arr.splice(id,1);
+        setLocalData(arr);
+        diplayData();
+        notify("", "Record has been deleted successfully", "error");
+    }
+  
 }
 
-function editData(index){
-    document.addEventListener('DOMContentLoaded', function () {
-       
-            alert('jhjh');
-            id = index;
-            console.log(id);
-            // Make sure to access the element after the DOM is loaded
-            document.getElementById('property_title').value = arr[index].propertyTitle;
-        
-    });
+function updateData(rid){
+    // alert(`the value of id is ${rid}`);
+    arr[rid].propertyTitle=propertyTitle;  
+    arr[rid].roomType=roomType;
+    arr[rid].propertyLocation=propertyLocation;
+    arr[rid].PropertyDescription=PropertyDescription;
+    // arr[rid].propertyImages[0].filename=propertyImages;
+    localStorage.setItem('propertyData', JSON.stringify(arr));
+    
 }
-
-
-
 
 
