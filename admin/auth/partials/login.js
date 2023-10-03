@@ -10,11 +10,15 @@ $("#login_form").validate({
     Password: {
       required: true,
     },
+    userType:{
+      required: true,
+    }
   },
   submitHandler: function () {
     event.preventDefault();
     let email = $("#email").val();
     let password = $("#password").val();
+    let userType= $("#userType").val();
     let arr = JSON.parse(localStorage.getItem("users"));
 
     $("#login_btn").text("Please wait..");
@@ -29,7 +33,7 @@ $("#login_form").validate({
         arr.find(checkCredentials);
 
         function checkCredentials(obj) {
-          if (obj.email === email) {
+          if (obj.email === email && obj.userType === userType) {
             const decrypted = CryptoJS.AES.decrypt(obj.password, "CIPHERKEY");
             const decryptedPassword = decrypted.toString(CryptoJS.enc.Utf8); // Convert decrypted data to a string
             if (decryptedPassword === password) {
@@ -53,6 +57,7 @@ $("#login_form").validate({
       }
 
       $("#password").val("");
+      $("#userType").val("");
     }, 2000);
   },
 });
