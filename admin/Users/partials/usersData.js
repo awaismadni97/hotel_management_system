@@ -130,7 +130,6 @@ function updateData(id){
    
   //   console.log(arr[id].fullName);
     setlocalData(arr);
-    console.log(arr);
    id=null
     
 }
