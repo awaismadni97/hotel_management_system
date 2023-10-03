@@ -55,18 +55,15 @@ $("#register_form").validate({
     let fullName = $("#fullName").val();
     let email = $("#email").val();
     let password = $("#password").val();
-    let userType= $("#userType").val();
     event.preventDefault();
     //password encryption
     cipher = CryptoJS.AES.encrypt(password, "CIPHERKEY");
     let cryptPassword = cipher.toString();
-    console.log("cryptPassword");
 
     let userObj = {
       fullName: fullName,
       email: email,
       password: cryptPassword,
-      userType:userType
     };
 
     $("#submit").text("Please wait..");
