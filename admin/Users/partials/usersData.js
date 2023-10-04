@@ -32,18 +32,17 @@ let arr = JSON.parse(localStorage.getItem("users"));
       }
     },
     submitHandler: function(form){
-
       let fullName= $("#fullName").val();
       let email= $("#email").val();
       let userType= $("#userType").val();
       event.preventDefault();
-
+       
       let userObj= {
         fullName:fullName,
         email:email,
         userType:userType
       }
-        
+      console.log(userObj);
       $("#submit").text("Please wait..");
       $("#submit").attr("disabled", true);
 
@@ -52,6 +51,7 @@ let arr = JSON.parse(localStorage.getItem("users"));
         if(id==null){
           // create logic
           if(arr==null){
+            alert('else arr is emty');
             let userData = [userObj];
             setlocalData(userData);
             $("#submit").text("Add");
@@ -68,21 +68,16 @@ let arr = JSON.parse(localStorage.getItem("users"));
           sessionStorage.setItem("UpdateSuccess", "true");
           $("#submit").text("Add");
          }
+
          resetData();
-         window.location = "/Users/display_users.html"
+         window.location = "display_users.html"
       }, 2000);
           // set Timeout closed
+          
     }
      //  submit Handler closed
    });
   //  jquery validate closed
- 
-
-   
-
-
-
-
 
 function displayData() {
     let html = "";
@@ -92,7 +87,7 @@ function displayData() {
       <td>${userObj.email}</td>
       <td>${userObj.userType}</td>
       <td>
-         <a href="/Users/add_user.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a>&nbsp;
+         <a href="./add_user.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a>&nbsp;
          <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-trash"></i></a>
       </td>
       </tr>`      

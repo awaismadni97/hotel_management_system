@@ -58,6 +58,7 @@ $("#propertyForm").validate({
      roomType= $("#room_type").val();
      propertyLocation= $("#property_location").val();
      PropertyDescription= $("#property_description").val();
+     pricingPlan =$("#price_plan").val();
      PropertyImages= propertyImages
 
     event.preventDefault();
@@ -67,6 +68,7 @@ $("#propertyForm").validate({
         roomType:roomType,
         propertyLocation:propertyLocation,
         PropertyDescription:PropertyDescription,
+        pricingPlan:pricingPlan,
         PropertyImages:PropertyImages
     }
 
@@ -115,6 +117,7 @@ function resetData(){
  $("#room_type").val('');
  $("#property_location").val('');
  $("#property_description").val('');
+ $("#price_plan").val('');
  $("#uploadFile").val(null);
 }
 
@@ -128,6 +131,7 @@ function diplayData(){
                  <td>${currentObj.roomType}</td>
                  <td>${currentObj.propertyLocation}</td>
                  <td>${currentObj.PropertyDescription}</td>
+                 <td>${currentObj.pricingPlan}</td>
                  <td><img src="../public/storage/property_images/${currentObj.PropertyImages[0].filename}" alt="" width=100></td>
                   
                  <td>
