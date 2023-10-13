@@ -25,7 +25,6 @@
                         <th scope="col" class="text-center">Title</th>
                         <th scope="col" class="text-center">Room Type</th>
                         <th scope="col" class="text-center">Location</th>
-                        <th scope="col" class="text-center">Property Description</th>
                         <th scope="col" class="text-center">Pricing/Night</th>
                         <th scope="col" class="text-center">Images</th>
                         <th scope="col" class="text-center">Actions</th>
@@ -70,12 +69,12 @@
         });
 
         if (sessionStorage.getItem("CreateSuccess") === "true") {
-          alert("Record has been added successfully");
+          notify('', 'Record has been added succefully','success');
           sessionStorage.removeItem("CreateSuccess");
         }
 
         if (sessionStorage.getItem("UpdateSuccess") === "true") {
-          alert("Record has been updated successfully");
+          notify('', 'Record has been updated succefully','warning');
           sessionStorage.removeItem("UpdateSuccess");
         }
       });

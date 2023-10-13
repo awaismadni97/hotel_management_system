@@ -347,6 +347,10 @@
             document.getElementById('bathroom_service_no').checked = true;
         }
           
+        if(arr[editIndex].propertyAttributesArray!==null){
+            arr[editIndex].propertyAttributesArray=[];
+            arr[editIndex].propertyAttributesArray.push(propertyAttributeObj);
+        }
             
      }
 

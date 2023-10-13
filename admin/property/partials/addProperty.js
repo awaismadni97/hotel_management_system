@@ -101,7 +101,6 @@ $("#save_btn").click(function(){
     
      submitHandler: function(form){
         // event.preventDefault();
-        alert('submit handler is called');
          propertyTitle= $("#property_title").val();
          roomType= $("#room_type").val();
          propertyLocation= $("#property_location").val();
@@ -181,12 +180,11 @@ function diplayData(){
                  <td>${currentObj.propertyTitle}</td>
                  <td>${currentObj.roomType}</td>
                  <td>${currentObj.propertyLocation}</td>
-                 <td>${currentObj.PropertyDescription}</td>
-                 <td>${currentObj.pricingPlan}</td>
+                 <td>$${currentObj.pricingPlan}</td>
                  <td><img src="../public/storage/property_images/${currentObj.PropertyImages[0].filename}" alt="" width=100></td>
                   
                  <td>
-                 
+                  <a href="" class="btn btn-info btn-sm"><i class="fa-regular fa-eye"></i></a>&nbsp;
                   <a href="./addProperty.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a> &nbsp;
                   <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-trash"></i></a> 
                  </td>
@@ -217,9 +215,12 @@ function updateData(rid){
     arr[rid].roomType=roomType;
     arr[rid].propertyLocation=propertyLocation;
     arr[rid].PropertyDescription=PropertyDescription;
+    arr[rid].pricingPlan=pricingPlan,
     // arr[rid].propertyImages[0].filename=propertyImages;
     arr[rid].propertyAttributesArray=propertyAttributesArray;
     localStorage.setItem('propertyData', JSON.stringify(arr));
     
 }
+
+
 
