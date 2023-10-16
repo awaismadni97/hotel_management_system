@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Top-nav bar -->
+    <div id="top-nav-placeholder"></div>
+    <div class="container my-4">
+       <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-4">
+        <!-- props detail -->
+
+       <p><strong>Title: &nbsp;</strong><span id="title_detail"></span></p> 
+        <p><strong>Room Type: &nbsp;</strong> <span id="room_detail"></span></p>
+        <p><strong>Location: &nbsp;</strong> <span id="location_detail"></span></p>
+        <p><strong>Property Description: &nbsp;</strong> <span id="description_details"></span></p>
+        <p><strong>Property Pricing: &nbsp;</strong> <span id="pricing_details"></span></p>
+        <p><strong>Property Image: </strong> <br><img id="image_details" width=200px></img></p>
+
+        </div>
+        <div class="col-md-5">
+        <!-- connect attr -->
+        <p><strong id="room_limit_head">Room Limit: &nbsp;</strong><span id="room-details"></span></p>
+        <p><strong id="Bed_type_head">Bed Type: &nbsp;</strong><span id="bed_details"></span></p>
+        <p><strong id="view-choice_head">View Choice: &nbsp;</strong><span id="view_details"></span></p>
+        <p><strong id="Non_Smokey_head">Non Smokey Room: &nbsp;</strong><span id="smoke_details"></span></p>
+        <p><strong id="Pet_Friendly_head">Pet Friendly: &nbsp;</strong><span id="pet_details"></span></p>
+        <p><strong id="Air_Condition_head">Air Conditionined Room: &nbsp;</strong><span id="air_condition_details"></span></p>
+        <p><strong id="Kitchen_availablity_head">Kitchen Availability: &nbsp;</strong><span id="Kitchen_avalibilty_details"></span></p>
+        <p><strong id="tv_service_head">TV Service: &nbsp;</strong><span id="tv_details"></span></p>
+        <p><strong id="Room_service_head">Room Service: &nbsp;</strong><span id="Room_Service_details"></span></p>
+        <p><strong id="privateBathroom_head">Private Bathroom: &nbsp;</strong><span id="bathroom_details"></span></p>
+        </div>
+       </div>
+    </div>
+     
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="./partials/addProperty.js"></script>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+           const topNavPlaceholder = document.getElementById('top-nav-placeholder');
+            fetch('../admin_Layout/top-nav.html')
+                .then(response => response.text())
+                .then(content => {
+                    topNavPlaceholder.innerHTML = content;
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const editIndex = urlParams.get('index');
+                showDetails(editIndex)
+
+});
+    </script>
+</body>
+</html>
+
