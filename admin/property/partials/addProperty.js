@@ -173,7 +173,7 @@ function diplayData() {
                  <td><img src="../public/storage/property_images/${currentObj.PropertyImages[0].filename}" alt="" width=100></td>
                   
                  <td>
-                  <a href="#" class="btn btn-primary btn-sm">Book</a>&nbsp;
+                  <a href="../reservations/reservation_form.html?index=${index}" class="btn btn-primary btn-sm">Book</a>&nbsp;
                   <a href="./PropertyDetails.html?index=${index}" class="btn btn-info btn-sm"><i class="fa-regular fa-eye"></i></a>&nbsp;
                   <a href="./addProperty.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a> &nbsp;
                   <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-trash"></i></a> 

@@ -1,6 +1,8 @@
 
 let id = null;
+let reservaData =false;
 let arr = JSON.parse(localStorage.getItem("users"));
+let reservationArray =JSON.parse(localStorage.getItem("Reservations"));
 
 
    $("#userForm").validate({
@@ -51,7 +53,6 @@ let arr = JSON.parse(localStorage.getItem("users"));
         if(id==null){
           // create logic
           if(arr==null){
-            alert('else arr is emty');
             let userData = [userObj];
             setlocalData(userData);
             $("#submit").text("Add");
@@ -88,7 +89,7 @@ function displayData() {
       <td>${userObj.userType}</td>
       <td>
          <a href="./add_user.html?index=${index}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square text-white" style="color: #3c5072;"></i></a>&nbsp;
-         <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index})"><i class="fa-solid fa-trash"></i></a>
+         <a href="#" class="btn btn-danger btn-sm" onclick="deleteData(${index},'${userObj.email}')"><i class="fa-solid fa-trash"></i></a>
       </td>
       </tr>`      
     });
@@ -97,11 +98,19 @@ function displayData() {
   
 }
 
-function deleteData(index){
+function deleteData(index,email){
+  let isExist= reservationArray.some((reservationObj)=>{
+    return reservationObj.userDetailsObj.email == email;
+  })
 let message= confirm("Do you want to delete this record?");
 if(message){
+  if(isExist==true){
+    reservationArray= reservationArray.filter( (reservationObj) =>{ return reservationObj.userDetailsObj.email !== email })
+    localStorage.setItem('Reservations', JSON.stringify(reservationArray));
+  }
   arr.splice(index,1);
   setlocalData(arr);
+
   displayData();
   notify("", "Record has been deleted successfully", "error");
 }
