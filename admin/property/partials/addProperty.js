@@ -141,7 +141,7 @@ $("#propertyForm").validate({
       }
       resetData();
       window.location = "displayProperty.html";
-    }, 1000);
+    }, 2000);
   },
 });
 

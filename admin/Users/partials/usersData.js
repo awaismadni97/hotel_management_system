@@ -134,6 +134,6 @@ function updateData(id){
    
   //   console.log(arr[id].fullName);
     setlocalData(arr);
-   id=null
+   id=null;
     
 }

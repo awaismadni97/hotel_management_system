@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dispay Reservation</title>
+        <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+        <!--  -->
+        <link rel="stylesheet" href="../auth/toast alert/toastr.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    </head>
+    <body>
+        <!-- Top-nav bar -->
+        <div id="top-nav-placeholder"></div>
+
+        <div class="container my-4 text-center">
+            <button class="btn btn-info float-right mb-3">
+                <a href="../property/displayProperty.html" class="text-white">Add Reservation</a>
+            </button>
+            <table class="table display text-center mt-4" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Client Name</th>
+                        <th scope="col" class="text-center">Client Email</th>
+                        <th scope="col" class="text-center">Client Phone Number</th>
+                        <th scope="col" class="text-center">Property Title</th>
+                        <th scope="col" class="text-center">Reservation Date</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="row_data"></tbody>
+            </table>
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="../auth/toast alert/toastr.min.js"></script>
+        <script src="../sharefile.js"></script>
+        <script src="./partials/reservations.js"></script>
+        <!--Bootstrap jquery and js  -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+        <!-- DataTables js files -->
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+        <!-- Display Data -->
+        <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        displayData();
+        const topNavPlaceholder = document.getElementById(
+          "top-nav-placeholder"
+        );
+        fetch("../admin_Layout/top-nav.html")
+          .then((response) => response.text())
+          .then((content) => {
+            topNavPlaceholder.innerHTML = content;
+          });
+
+          $("#myTable").DataTable({
+          dom: "Bfrtip",
+          buttons: ["copy", "csv", "excel", "pdf", "print"],
+        });
+
+        if (sessionStorage.getItem("CreateSuccess") === "true") {
+          notify('', 'Record has been added succefully','success');
+          sessionStorage.removeItem("CreateSuccess");
+        }
+
+        if (sessionStorage.getItem("UpdateSuccess") === "true") {
+          notify('', 'Record has been updated succefully','warning');
+          sessionStorage.removeItem("UpdateSuccess");
+        }
+
+          
+      });
+        </script>
+    </body>
+</html>

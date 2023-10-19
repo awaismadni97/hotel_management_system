@@ -52,32 +52,44 @@
               <input type="date" name="reservationDate" id="reservationDate" class="form-control" />
             </div>
             <br>
-            <button class="btn-outline-primary form-control" type="submit">Book</button>
+            <button class="btn-outline-primary form-control" type="submit" id="submit">Book</button>
           </form>
         </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <!-- <script src="../property/partials/addProperty.js"></script> -->
     <script src="./partials/reservations.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        
         const topNavPlaceholder = document.getElementById(
           "top-nav-placeholder"
         );
-
+   
         fetch("../admin_Layout/top-nav.html")
           .then((response) => response.text())
           .then((content) => {
             topNavPlaceholder.innerHTML = content;
         });
 
+        // $("#submit").text("Book");
         // Get the URL query parameters
         const urlParams = new URLSearchParams(window.location.search);
         const editIndex = urlParams.get("index");
-              
           fetchPropertyDetails(editIndex);
+
+          
+          const catchUrl = new URLSearchParams(window.location.search);
+          const catchQueryParameter =urlParams.get("queryParameter");
+          id=catchQueryParameter;
+          // $("#submit").text("Update");
+          document.getElementById('fullName').value = reservationArray[catchQueryParameter].userDetailsObj.fullName;
+          document.getElementById('email').value=reservationArray[catchQueryParameter].userDetailsObj.email;
+          document.getElementById('phoneNumber').value=reservationArray[catchQueryParameter].userDetailsObj.phoneNumber;
+          document.getElementById('reservationDate').value=reservationArray[catchQueryParameter].userDetailsObj.reservationDate;
+        
+         
       });
     </script>
   </body>
