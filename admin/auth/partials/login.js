@@ -30,7 +30,7 @@ $("#login_form").validate({
         arr.find(checkCredentials);
 
         function checkCredentials(obj) {
-          if (obj.email === email) {
+          if (obj.email === email && obj.userType ==='client') {
             const decrypted = CryptoJS.AES.decrypt(obj.password, "CIPHERKEY");
             const decryptedPassword = decrypted.toString(CryptoJS.enc.Utf8); // Convert decrypted data to a string
             if (decryptedPassword === password) {
@@ -45,7 +45,7 @@ $("#login_form").validate({
         if (isValidAuth == true) {
           const  token = makeid(50);
           localStorage.setItem('token', token);
-          window.location.href = "../Home/dashboard.html";
+          window.location.href = "../../front_end/property_List.html";
         } else {
           notify("Error", "Invalid credentials", "error");
         }

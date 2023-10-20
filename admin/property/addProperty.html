@@ -293,9 +293,8 @@
                 document.getElementById('property_location').value = arr[editIndex].propertyLocation;
                 document.getElementById('property_description').value = arr[editIndex].PropertyDescription;
                 document.getElementById('price_plan').value= arr[editIndex].pricingPlan;
-                // let picname = arr[editIndex].PropertyImages[0].filename;
-
-                // document.getElementById('bannerImg').setAttribute('src', '../public/storage/property_images/picname');
+              
+                document.getElementById('bannerImg').setAttribute('src', `../public/storage/property_images/${arr[editIndex].PropertyImages[0].filename}`);
                     
                 // For setting values for attribute Form
                 document.getElementById('room_limit').value= arr[editIndex].propertyAttributesArray[0].roomLimit;

@@ -90,7 +90,7 @@ $("#reservation_form").validate({
 
       resetData();
       // window.location = "display_reservation.html";
-    
+    alert('Your booking has been done');
   }
   //  submit Handler closed
 });
@@ -104,7 +104,7 @@ function resetData() {
 
 function fetchPropertyDetails(index) {
   propertyDetailsObj = propertyArray[index];
-  // console.log(propertyDetailsObj);
+  console.log(propertyDetailsObj);
 }
 
 function displayData() {

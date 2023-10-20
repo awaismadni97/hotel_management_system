@@ -64,6 +64,7 @@ $("#register_form").validate({
       fullName: fullName,
       email: email,
       password: cryptPassword,
+      userType:'client'
     };
 
     $("#submit").text("Please wait..");

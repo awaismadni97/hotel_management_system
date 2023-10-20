@@ -8,6 +8,7 @@ let arr = JSON.parse(localStorage.getItem("propertyData"));
 //  get image file
 $("#uploadFile").change(function (e) {
   catchImageFile = e.target.files;
+  alert(catchImageFile[0].name);
   for (let allFiles of catchImageFile) {
     Imgfilename = allFiles.name;
 
@@ -204,7 +205,8 @@ function updateData(rid) {
   arr[rid].propertyLocation = propertyLocation;
   arr[rid].PropertyDescription = PropertyDescription;
   (arr[rid].pricingPlan = pricingPlan),
-    // arr[rid].propertyImages[0].filename=propertyImages;
+    
+ console.log(arr[rid].propertyImages);
     (arr[rid].propertyAttributesArray = propertyAttributesArray);
   localStorage.setItem("propertyData", JSON.stringify(arr));
 }
